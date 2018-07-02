@@ -1,0 +1,29 @@
+<!--
+  Generated template for the BalancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Balance</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list-header>
+    Balance del día {{date}}
+  </ion-list-header>
+  <ion-list>
+    <ion-item *ngFor="let operation of operations ">
+      <ion-avatar item-left>
+        <h1>#{{operation.id}}</h1>
+      </ion-avatar>
+      <h3>Fecha: {{getDate(operation.date)}} {{getTime(operation.date)}}</h3>
+      <p>Ingresos: {{operation.amount | currency:'VEF':'symbol-narrow'}} / {{operation.amount | currency:'XBT':'symbol'}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

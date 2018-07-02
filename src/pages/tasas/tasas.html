@@ -1,0 +1,34 @@
+<!--
+  Generated template for the TasasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Tasas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Seleccionar moneda</ion-label>
+    <ion-select [(ngModel)]="selectedCurrency" interface="popover">
+      <ion-option *ngFor="let currency of fees" [value]="currency">{{currency.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="selectedCurrency != undefined" >
+    <ion-avatar item-left>
+      <h1>
+        <ion-icon name="logo-bitcoin"></ion-icon>
+      </h1>
+    </ion-avatar>
+
+    <h2>{{selectedCurrency.name}}</h2>
+    <p>Precio por {{selectedCurrency.name}}: {{selectedCurrency.value | currency:'VEF':'symbol-narrow'}}</p>
+  </ion-item>
+</ion-content>

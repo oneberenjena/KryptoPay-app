@@ -1,10 +1,16 @@
+import { LoginPage } from './../pages/login/login';
+import { FeesProvider } from './../providers/fees/fees';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+// import { ListPage } from '../pages/list/list';
+import { CalculatorPage } from './../pages/calculator/calculator';
+import { BalancePage } from './../pages/balance/balance';
+import { TasasPage } from '../pages/tasas/tasas';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -13,17 +19,32 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  pages: Array<{ title: string, component: any }>;
+  operations: Array<{
+    id: number,
+    amountBs: number,
+    amountBtc: number,
+    date: Date
+  }>
 
-  pages: Array<{title: string, component: any}>;
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    fees: FeesProvider
+  ) {
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'Login', component: LoginPage },
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Registrar Operación', component: CalculatorPage },
+      { title: 'Balance', component: BalancePage },
+      { title: 'Tasas', component: TasasPage }
     ];
+
 
   }
 
