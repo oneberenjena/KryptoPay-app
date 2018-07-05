@@ -16,8 +16,6 @@ import { IonicPage, NavController, NavParams, ItemSliding } from 'ionic-angular'
   templateUrl: 'tasas.html',
 })
 export class TasasPage {
-  // fees: Array<{ name: string, value: number }> = [];
-  // fees: Array<CryptoCurrency> = [];
   fees: CryptoList;
   selectedCurrency: CryptoCurrency;
   errorMessage: string;
@@ -43,7 +41,6 @@ export class TasasPage {
   getFees() {
     this.feesProvider.getFees()
       .subscribe(
-        // fee => this.fees.push(fee),
         fee => this.fees.updateCryptoValue(fee.name, fee.value),
         error => this.errorMessage = <any>error
       );

@@ -1,9 +1,9 @@
-import { CryptoCurrency } from './../../data-model';
 import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 import { FeesProvider } from './../../providers/fees/fees';
+import { CryptoCurrency, CryptoList, Operation } from './../../data-model';
 
 
 /**
@@ -23,18 +23,11 @@ export class CalculatorPage {
   date: String = moment().format();
   amountBsf: number;
   amountCrypto: number;
-  // selectedCrypto: {
-  //   name: string,
-  //   value: number
-  // };
   selectedCrypto: CryptoCurrency;
-  // availableCrypto: Array<{
-  //   name: string,
-  //   value: number
-  // }> = [];
-  availableCrypto: Array<CryptoCurrency>;
-  operation: { id: number, amountBs: number, amountBtc: number, date: Date }
+  availableCrypto: CryptoList;
+  operation: Operation
   errorMessage: string;
+  refNum: number;
 
   constructor(
     public navCtrl: NavController,
@@ -61,14 +54,16 @@ export class CalculatorPage {
   getFees() {
     this.fees.getFees()
       .subscribe(
-        fees => this.availableCrypto.push(fees),
+        fee => this.availableCrypto.updateCryptoValue(fee.name, fee.value),
         error => this.errorMessage = <any>error
       );
   }
 
   createOperation() {
-    this.operation.amountBs = this.amountBsf;
-    this.operation.amountBtc = this.amountCrypto;
-    this.operation.date = new Date();
+    this.operation = new Operation(
+      this.selectedCrypto,
+      this.amountBsf,
+      this.amountCrypto, this.refNum
+    );
   }
 }
