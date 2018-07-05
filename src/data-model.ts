@@ -6,6 +6,11 @@ export class CryptoCurrency {
     public name: string;
     public value: number;
 
+    public constructor(name: string, value: number = .0) {
+        this.name = name;
+        this.value = value;
+    }
+
     public updateValue(val: number) {
         this.value = val;
     }
@@ -19,7 +24,7 @@ export class CryptoList {
     }
 
     public getCrypto(name: string): any {
-        this.cryptos.find(crypto => {
+        return this.cryptos.find(crypto => {
             return crypto.name === name;
         });
     }
@@ -27,7 +32,9 @@ export class CryptoList {
     public updateCryptoValue(crypto: string, val: number) {
         let selectedCrypto: CryptoCurrency = this.getCrypto(crypto);
         if (!selectedCrypto) {
-            return Error("Usted no ha registrado la moneda " + crypto + ".");
+            selectedCrypto = new CryptoCurrency(crypto, val);
+            this.addCrypto(selectedCrypto);
+            // return Error("Usted no ha registrado la moneda " + crypto + ".");
         } else {
             selectedCrypto.updateValue(val);
         }

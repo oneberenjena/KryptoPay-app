@@ -1,7 +1,7 @@
 import { CryptoCurrency, CryptoList } from './../../data-model';
 import { FeesProvider } from './../../providers/fees/fees';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ItemSliding } from 'ionic-angular';
 
 /**
  * Generated class for the TasasPage page.
@@ -16,9 +16,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tasas.html',
 })
 export class TasasPage {
-  fees: Array<{ name: string, value: number }> = [];
+  // fees: Array<{ name: string, value: number }> = [];
   // fees: Array<CryptoCurrency> = [];
-  // fees: CryptoList;
+  fees: CryptoList;
   selectedCurrency: CryptoCurrency;
   errorMessage: string;
 
@@ -27,6 +27,7 @@ export class TasasPage {
     public navParams: NavParams,
     public feesProvider: FeesProvider
   ) {
+    this.fees = new CryptoList();
     this.getFees();
   }
 
@@ -34,11 +35,16 @@ export class TasasPage {
     console.log('ionViewDidLoad TasasPage');
   }
 
+  updateFee(slidingCurrency: ItemSliding){
+    this.getFees();
+    slidingCurrency.close();
+  }
+
   getFees() {
     this.feesProvider.getFees()
       .subscribe(
-        // fee => this.fees.storeOperation(fee),
-        fee => this.fees.push(fee),
+        // fee => this.fees.push(fee),
+        fee => this.fees.updateCryptoValue(fee.name, fee.value),
         error => this.errorMessage = <any>error
       );
   }

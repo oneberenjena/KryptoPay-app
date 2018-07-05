@@ -13,10 +13,12 @@ import 'rxjs/add/operator/catch';
 */
 @Injectable()
 export class FeesProvider {
-  private path: string = '../../assets/fees/prices.json';
+  // private path: string = 'https://kryptomeerkat-lbcapi.herokuapp.com/'
+  private path: string = 'assets/fees/prices.json';
+  // private path: string = '../../../www/assets/fees/prices.json';
 
   constructor(public http: HttpClient) {
-    console.log('Hello FeesProvider Provider');
+    console.log('Starting localbitcoins BTC mean price calculator.');
   }
 
   getFees(): any {

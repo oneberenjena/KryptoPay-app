@@ -17,18 +17,28 @@
   <ion-item>
     <ion-label>Seleccionar moneda</ion-label>
     <ion-select [(ngModel)]="selectedCurrency" interface="popover">
-      <ion-option *ngFor="let currency of fees" [value]="currency">{{currency.name}}</ion-option>
+      <ion-option *ngFor="let currency of fees.cryptos" [value]="currency">{{currency.name}}</ion-option>
     </ion-select>
   </ion-item>
+  <ion-list>
+    <ion-item-sliding #slidingCurrency>
+      <ion-item *ngIf="selectedCurrency != undefined">
+        <ion-avatar item-left>
+          <h1>
+            <ion-icon name="logo-bitcoin"></ion-icon>
+          </h1>
+        </ion-avatar>
 
-  <ion-item *ngIf="selectedCurrency != undefined" >
-    <ion-avatar item-left>
-      <h1>
-        <ion-icon name="logo-bitcoin"></ion-icon>
-      </h1>
-    </ion-avatar>
-
-    <h2>{{selectedCurrency.name}}</h2>
-    <p>Precio por {{selectedCurrency.name}}: {{selectedCurrency.value | currency:'VEF':'symbol-narrow'}}</p>
-  </ion-item>
+        <h2>{{selectedCurrency.name}}</h2>
+        <p>Precio por {{selectedCurrency.name}}: {{selectedCurrency.value | currency:'VEF':'symbol-narrow'}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="updateFee(slidingCurrency)">
+          <ion-icon name="refresh"></ion-icon>
+          Actualizar
+        </button>
+        
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
