@@ -22,7 +22,7 @@
       <ion-item>
         <ion-label>Seleccionar moneda:</ion-label>
         <ion-select [(ngModel)]="selectedCrypto" interface="popover">
-          <ion-option *ngFor="let crypto of availableCrypto" [value]="crypto">{{crypto.name}}</ion-option>
+          <ion-option *ngFor="let crypto of availableCrypto.cryptos" [value]="crypto">{{crypto.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

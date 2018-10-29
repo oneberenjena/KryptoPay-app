@@ -14,6 +14,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FeesProvider } from '../providers/fees/fees';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginProvider } from '../providers/login/login';
+import { CryptoCurrenciesProvider } from '../providers/crypto-currencies/crypto-currencies';
+import { WorkerProvider } from '../providers/worker/worker';
+
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +49,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FeesProvider
+    FeesProvider,
+    LoginProvider,
+    CryptoCurrenciesProvider,
+    WorkerProvider
   ]
 })
 export class AppModule {}

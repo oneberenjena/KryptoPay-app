@@ -36,6 +36,7 @@ export class CalculatorPage {
     public fees: FeesProvider
   ) {
     this.selectedCrypto = undefined;
+    this.availableCrypto = new CryptoList();
     this.getFees();
   }
 

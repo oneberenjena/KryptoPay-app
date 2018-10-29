@@ -27,6 +27,12 @@ export class CryptoList {
         return this.cryptos.find(crypto => {
             return crypto.name === name;
         });
+
+        return null;
+    }
+
+    public cryptoExists(name: string): boolean {
+        return !this.getCrypto(name) ? false : true; 
     }
 
     public updateCryptoValue(crypto: string, val: number) {

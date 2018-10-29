@@ -22,13 +22,12 @@
       <ion-item>
         <ion-input type="text" formControlName="username" placeholder="Usuario"></ion-input>
       </ion-item>
-
       <ion-item *ngIf="username.hasError('required') && username.touched">
         <p>*Debe indicar un nombre de usuario</p>
       </ion-item>
-
+      
       <ion-item>
-        <ion-input type="text" formControlName="password" placeholder="Contraseña"></ion-input>
+        <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
       </ion-item>
       
       <ion-item *ngIf="password.hasError('required') && password.touched">
@@ -37,7 +36,7 @@
     
     </ion-list>
 
-    <button outline ion-button>Ingresar</button>
+    <button outline ion-button (click)="login()">Ingresar</button>
   </form>
 
 </ion-content>
